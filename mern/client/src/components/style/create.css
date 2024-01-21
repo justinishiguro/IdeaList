@@ -1,0 +1,93 @@
+.idea-generation {
+    background-color: #00e0ff;
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center the content vertically and horizontally */
+    padding: 50px; /* Add some padding around */
+    box-sizing: border-box; /* Include padding in the width and height */
+}
+
+.text-wrapper {
+    color: #000000;
+    font-family: "Karla", sans-serif; /* Assuming 'Karla-Bold' is just 'Karla' with font-weight */
+    font-size: 49px; /* This size may be reduced for smaller screens using media queries */
+    font-weight: 700;
+    margin-bottom: 20px; /* Space between title and subtitle */
+}
+
+.idea-generation .div { /* It's not advisable to directly style 'div', better to give a class */
+    color: #000000;
+    font-family: "Karla", sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 20px; /* Space between subtitle and content */
+}
+
+.hands-show {
+    /* Assuming the image will be set as a background to some div */
+    background-image: src('./style/images/hands-show.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%; /* Responsive width */
+    max-width: 369px; /* Max width of the image */
+    height: auto; /* Maintain aspect ratio */
+    margin: 20px 0; /* Margin around the image */
+}
+
+.frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Adjust the gap as needed */
+}
+
+.group {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline; /* Aligns items along the baseline */
+}
+
+.TIME {
+    color: #000000;
+    font-family: "Karla", sans-serif;
+    font-size: 42px;
+    font-weight: 400;
+}
+
+.idea-wrapper {
+    align-items: center;
+    background-color: #ffffff;
+    border: 5px solid #ffda2d;
+    border-radius: 82px;
+    display: flex;
+    justify-content: center;
+    padding: 10px 58px;
+    margin: 20px 0; /* Adjust as needed */
+}
+
+.idea {
+    color: #4a4a4a;
+    font-family: "Karla", sans-serif;
+    font-size: 36px;
+    line-height: 1.3; /* It's generally better to use unitless line-height for better scaling */
+}
+
+.btn-primary {
+    background-color: #ffda2d;
+    border: none;
+    border-radius: 82px;
+    color: #000000;
+    font-family: "Karla", sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    padding: 10px 58px;
+    margin: 20px 0; /* Adjust as needed */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Horizontally centers the content */
+    /* Additional styles here */
+  }
