@@ -8,6 +8,7 @@ export default function Create() {
   const [form, setForm] = useState({
     text: "",
     votes: 0,
+    projectContext: ""  // Add a projectContext state
  });
   const navigate = useNavigate();
  
@@ -42,7 +43,7 @@ export default function Create() {
       return;
     });
  
-    setForm({ text: "", votes: 0});
+    setForm({ text: "", votes: 0, projectContext: ""});
     //navigate("/");
   }
 
@@ -68,6 +69,14 @@ export default function Create() {
                           placeholder="Write your ideas"
                         />
                       </div>
+                      <input
+                        type="text"
+                        className="idea-context-input"
+                        id="projectContext"
+                        value={form.projectContext}
+                        onChange={(e) => updateForm({ projectContext: e.target.value })}
+                        placeholder="Enter project context"
+                      />
                       <div className="button-container">
                         <input
                           type="submit"

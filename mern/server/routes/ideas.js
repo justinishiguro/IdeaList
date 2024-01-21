@@ -20,6 +20,7 @@ router.post('/', async (req, res) => {
     console.log("MADE IT INTO THE POST FUNCTION");
     let idea = {
         text: req.body.text,
+        projectContext: req.body.text,
         votes: 0,
         // other fields initialized as needed
     };
