@@ -1,17 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Record = (props) => {
+const Idea = (props) => {
   const [isChecked, setChecked] = useState(false);
 
-  const handleChange = () => {
-    setChecked(!isChecked);
-    console.log(props.record);
+  const handleChange = async () => {
+    const newChecked = !isChecked;
+    setChecked(newChecked);
+  
+    try {
+      const response = await fetch(`http://localhost:5050/ideas/vote/${props.idea._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // Send the new vote state (increment or decrement) to the backend
+        body: JSON.stringify({ increment: newChecked }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+  
+      const result = await response.json();
+      console.log(result); // For debugging purposes
+    } catch (error) {
+      console.error('Failed to update vote:', error);
+      alert('Failed to update vote');
+    }
   };
 
 return (
  <tr>
-   <td>{props.record.name}</td>
+   <td>{props.idea.text}</td>
    <td>
      <input
           type="checkbox"
@@ -22,7 +43,7 @@ return (
    <td>
    <button className="btn btn-link"
        onClick={() => {
-         props.deleteRecord(props.record._id);
+         props.deleteIdea(props.idea._id);
        }}
      >
        Delete
@@ -31,13 +52,13 @@ return (
  </tr>
 )};
 
-export default function RecordList() {
- const [records, setRecords] = useState([]);
+export default function IdeaList() {
+ const [ideas, setIdeas] = useState([]);
 
  // This method fetches the records from the database.
  useEffect(() => {
-   async function getRecords() {
-     const response = await fetch(`http://localhost:5050/record/`);
+   async function getIdeas() {
+     const response = await fetch(`http://localhost:5050/ideas/`);
 
      if (!response.ok) {
        const message = `An error occurred: ${response.statusText}`;
@@ -45,33 +66,33 @@ export default function RecordList() {
        return;
      }
 
-     const records = await response.json();
-     setRecords(records);
+     const ideas = await response.json();
+     setIdeas(ideas);
    }
 
-   getRecords();
+   getIdeas();
 
    return;
- }, [records.length]);
+ }, [ideas.length]);
 
  // This method will delete a record
- async function deleteRecord(id) {
-   await fetch(`http://localhost:5050/record/${id}`, {
+ async function deleteIdea(id) {
+   await fetch(`http://localhost:5050/ideas/${id}`, {
      method: "DELETE"
    });
 
-   const newRecords = records.filter((el) => el._id !== id);
-   setRecords(newRecords);
+   const newIdeas = ideas.filter((el) => el._id !== id);
+   setIdeas(newIdeas);
  }
 
  // This method will map out the records on the table
- function recordList() {
-   return records.map((record) => {
+ function ideaList() {
+   return ideas.map((idea) => {
      return (
-       <Record
-         record={record}
-         deleteRecord={() => deleteRecord(record._id)}
-         key={record._id}
+       <Idea
+         idea={idea}
+         deleteIdea={() => deleteIdea(idea._id)}
+         key={idea._id}
        />
        
      );
@@ -90,7 +111,7 @@ export default function RecordList() {
            <th>Delete</th>
          </tr>
        </thead>
-       <tbody>{recordList()}</tbody>
+       <tbody>{ideaList()}</tbody>
      </table>
    </div>
  );

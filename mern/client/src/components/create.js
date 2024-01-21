@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 export default function Create() {
  const [form, setForm] = useState({
-   name: "",
+   text: "",
    votes: 0,
  });
  const navigate = useNavigate();
@@ -20,21 +20,21 @@ export default function Create() {
    e.preventDefault();
 
    // When a post request is sent to the create url, we'll add a new record to the database.
-   const newPerson = { ...form };
-
-   await fetch("http://localhost:5050/record", {
+   const newIdea = { ...form };
+   console.log("This is the object: ", newIdea);
+   await fetch("http://localhost:5050/ideas", {
      method: "POST",
      headers: {
        "Content-Type": "application/json",
      },
-     body: JSON.stringify(newPerson),
+     body: JSON.stringify(newIdea),
    })
    .catch(error => {
      window.alert(error);
      return;
    });
 
-   setForm({ name: "", votes: 0});
+   setForm({ text: "", votes: 0});
    //navigate("/");
  }
 
@@ -44,13 +44,13 @@ export default function Create() {
      <h3>Generate Ideas</h3>
      <form onSubmit={onSubmit}>
        <div className="form-group">
-         <label htmlFor="name">Idea</label>
+         <label htmlFor="text">Idea</label>
          <input
            type="text"
            className="form-control"
-           id="name"
-           value={form.name}
-           onChange={(e) => updateForm({ name: e.target.value })}
+           id="text"
+           value={form.text}
+           onChange={(e) => updateForm({ text: e.target.value })}
          />
        </div>
        <div className="form-group">
