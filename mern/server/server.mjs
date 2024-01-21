@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
 
   socket.on('joinTeam', (joinCode) => {
     socket.join(joinCode);
-    console.log('User with ID: ${socket.id} joined team: ${joinCode}');
+    console.log(`User with ID: ${socket.id} joined team: ${joinCode}`);
 
     if(teamTimers[joinCode] && teamTimers[joinCode].isTimerStarted) {
       socket.emit('timerState', { isTimerStarted: true });
@@ -73,6 +73,10 @@ io.on('connection', (socket) => {
     } else {
       socket.emit('timerState', {isTimerStarted: false});
     }
+  });
+
+  socket.on('startTimerForTeam', (joinCode) => {
+    io.to(joinCode).emit('navigateToCreate');
   });
 
   socket.on('startTimer', (joinCode) => {

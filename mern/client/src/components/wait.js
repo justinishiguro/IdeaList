@@ -11,6 +11,24 @@ export default function Wait() {
     const location = useLocation(); // To access the URL query parameters
     const queryParams = new URLSearchParams(location.search);
     const joinCode = queryParams.get('joinCode'); // Get teamId from the URL
+    const socket = useSocket();
+
+    useEffect(() => {
+        if (socket && joinCode) {
+          socket.emit('joinTeam', joinCode);
+    
+          // Listen for the 'navigateToCreate' event
+          socket.on('navigateToCreate', () => {
+            navigate(`/create?joinCode=${joinCode}`);
+          });
+    
+          // Cleanup when component unmounts
+          return () => {
+            socket.off('navigateToCreate');
+          };
+        }
+      }, [socket, joinCode, navigate]);
+
   
     const [timer, setTimer] = useState(null);
     const [showStartButton, setShowStartButton] = useState(true);

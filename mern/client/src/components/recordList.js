@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai'; // Import icons for dropdown
+import { useSocket } from '../socketContext'; // Import the useSocket hook
+
 
 
 const Idea = ({ idea, deleteIdea, projectContext }) => {
@@ -9,6 +11,47 @@ const Idea = ({ idea, deleteIdea, projectContext }) => {
   const [loading, setLoading] = useState(false);
   const [showInsights, setShowInsights] = useState(false); // State to show/hide insights
   const [insights, setInsights] = useState(''); // State for AI insights specific to this idea
+  const [timer, setTimer] = useState(null);
+  const location = useLocation(); // To access the URL query parameters
+  const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search);
+  const joinCode = queryParams.get('joinCode'); // Get teamId from the URL
+  const socket = useSocket();
+  
+
+  useEffect(() => {
+    console.log('Setting up socket listeners'); // Log when setting up listeners
+    if (socket && joinCode) {
+      // Join the team when the component mounts
+      //socket.emit('joinTeam', joinCode);
+
+      socket.on('timerUpdate', (data) => {
+        console.log('Timer update received:', data); // Log timer updates
+        setTimer(data.remainingTime);
+      });
+
+      socket.on('timerState', (data) => {
+        console.log('Timer state received:', data); // Log timer state changes
+      });
+
+      socket.on('phaseEnded', () => {
+        console.log('Phase ended received'); // Log phase end event
+        navigate('/recordList'); // Navigate to the RecordList page when the phase ends
+      });
+
+      // Cleanup listeners when the component unmounts
+      return () => {
+        console.log('Cleaning up socket listeners'); // Log cleanup
+        socket.off('timerUpdate');
+        socket.off('timerState');
+        socket.off('phaseEnded');
+      };
+    }
+  }, [socket, navigate, joinCode]);
+
+
+
+
 
 
   const handleChange = async () => {

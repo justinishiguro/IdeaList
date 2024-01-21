@@ -23,7 +23,7 @@ export default function Create() {
     console.log('Setting up socket listeners'); // Log when setting up listeners
     if (socket && joinCode) {
       // Join the team when the component mounts
-      socket.emit('joinTeam', joinCode);
+      //socket.emit('joinTeam', joinCode);
 
       socket.on('timerUpdate', (data) => {
         console.log('Timer update received:', data); // Log timer updates
@@ -37,7 +37,7 @@ export default function Create() {
 
       socket.on('phaseEnded', () => {
         console.log('Phase ended received'); // Log phase end event
-        navigate('/recordList'); // Navigate to the RecordList page when the phase ends
+        navigate(`/recordList?joinCode=${joinCode}`);  
       });
 
       // Cleanup listeners when the component unmounts
