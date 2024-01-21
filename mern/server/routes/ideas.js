@@ -80,6 +80,28 @@ router.patch("/vote/:id", async (req, res) => {
       res.status(500).json({ message: err.message });
     }
   });
+
+  // Get the average votes for all ideas
+  router.get("/average-votes", async (req, res) => {
+    try {
+      const collection = db.collection("ideas");
   
+      // Aggregate to calculate the average votes
+      const result = await collection.aggregate([
+        {
+          $group: {
+            _id: null,
+            averageVotes: { $avg: "$votes" },
+          },
+        },
+      ]).toArray();
+  
+      const averageVotes = result[0].averageVotes;
+      res.status(200).json({ averageVotes });
+    } catch (err) {
+      console.error("Error calculating average votes:", err.message);
+      res.status(500).json({ message: err.message });
+    }
+  });
 
 export default router; // Using ES6 default export

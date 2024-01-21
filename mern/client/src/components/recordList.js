@@ -180,6 +180,29 @@ export default function IdeaList() {
    setIdeas(newIdeas);
  }
 
+// This method will delete the ideas that are below the average
+ async function getAverage() {
+  const response = await fetch(`http://localhost:5050/ideas/average-votes/`);
+
+  if (!response.ok) {
+    const message = `An error occurred: ${response.statusText}`;
+    window.alert(message);
+    return;
+  }
+
+  // average is here
+  const avg = await response.json();
+
+  const arrIdeas = await fetch(`http://localhost:5050/ideas/`);
+  const allIdeas = await arrIdeas.json();
+
+  allIdeas.forEach((idea) => {
+    if (idea.votes < avg.averageVotes) {
+      deleteIdea(idea._id)
+    }
+  });
+}
+
   const ideaList = () => {
     return ideas.map((idea) => {
       
