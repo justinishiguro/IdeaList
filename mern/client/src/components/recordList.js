@@ -4,17 +4,18 @@ import { Link } from "react-router-dom";
 const Record = (props) => (
  <tr>
    <td>{props.record.name}</td>
-   <td>{props.record.position}</td>
-   <td>{props.record.level}</td>
    <td>
-     <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
+     {/* <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
      <button className="btn btn-link"
        onClick={() => {
          props.deleteRecord(props.record._id);
        }}
      >
        Delete
-     </button>
+     </button> */}
+     <input
+          type="checkbox"
+        />
    </td>
  </tr>
 );
@@ -61,6 +62,7 @@ export default function RecordList() {
          deleteRecord={() => deleteRecord(record._id)}
          key={record._id}
        />
+       
      );
    });
  }
@@ -68,14 +70,12 @@ export default function RecordList() {
  // This following section will display the table with the records of individuals.
  return (
    <div>
-     <h3>Record List</h3>
+     <h3>Idea List</h3>
      <table className="table table-striped" style={{ marginTop: 20 }}>
        <thead>
          <tr>
-           <th>Name</th>
-           <th>Position</th>
-           <th>Level</th>
-           <th>Action</th>
+           <th>Idea</th>
+           <th>Like</th>
          </tr>
        </thead>
        <tbody>{recordList()}</tbody>
