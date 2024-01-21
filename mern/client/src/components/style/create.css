@@ -78,6 +78,7 @@
     font-family: "Karla", sans-serif;
     font-size: 36px;
     line-height: 1.3; /* It's generally better to use unitless line-height for better scaling */
+    display: flex;
 }
 
 .btn-primary {

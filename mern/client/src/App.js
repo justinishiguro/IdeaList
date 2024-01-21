@@ -6,6 +6,7 @@ import RecordList from "./components/recordList";
 import Edit from "./components/edit";
 import Create from "./components/create";
 import Home from "./components/home";
+import Wait from "./components/wait";
 import TimerTest from "./components/TimerTest"; // Import the TimerTest component
 
 const App = () => {
@@ -17,7 +18,8 @@ const App = () => {
           <Route exact path="/" element={<Home />} />
           <Route path="/edit/:id" element={<Edit />} />
           <Route path="/create" element={<Create />} />
-        <Route path="/recordList" element={<RecordList />} />
+          <Route path="/recordList" element={<RecordList />} />
+          <Route path="/wait" element={<Wait />} />
           <Route path="/timertest" element={<TimerTest />} /> {/* Add this line */}
         </Routes>
       </div>

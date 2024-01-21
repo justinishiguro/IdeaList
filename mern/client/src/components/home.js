@@ -20,8 +20,9 @@ export default function Home() {
                 <img className="big-shoes-discussion" alt="Big shoes discussion" src={ideaImage} />
             </div>
             <div className="start-button-container">
-                <NavLink to="/create">
-                    <button className="start-button">LET’S START</button>
+                <NavLink to="/wait">
+                    <button className="start-button">Create Room</button>
+                    <button className="start-button">Join Room</button>
                 </NavLink>
             </div>
             {/* Additional content goes here */}

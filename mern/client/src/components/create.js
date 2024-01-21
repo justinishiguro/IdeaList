@@ -71,7 +71,7 @@ export default function Create() {
                       </div>
                       <input
                         type="text"
-                        className="idea-context-input"
+                        className="idea-wrapper"
                         id="projectContext"
                         value={form.projectContext}
                         onChange={(e) => updateForm({ projectContext: e.target.value })}
