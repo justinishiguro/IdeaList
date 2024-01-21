@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Record = (props) => (
+const Record = (props) => {
+  const [isChecked, setChecked] = useState(false);
+
+  const handleChange = () => {
+    setChecked(!isChecked);
+    console.log(props.record);
+  };
+
+return (
  <tr>
    <td>{props.record.name}</td>
    <td>
-     {/* <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
-     <button className="btn btn-link"
-       onClick={() => {
-         props.deleteRecord(props.record._id);
-       }}
-     >
-       Delete
-     </button> */}
      <input
           type="checkbox"
+          onChange={handleChange}
+          checked={isChecked}
         />
    </td>
  </tr>
-);
+)};
 
 export default function RecordList() {
  const [records, setRecords] = useState([]);

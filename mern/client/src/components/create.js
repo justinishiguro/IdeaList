@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 export default function Create() {
  const [form, setForm] = useState({
    name: "",
+   votes: 0,
  });
  const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ export default function Create() {
      return;
    });
 
-   setForm({ name: ""});
+   setForm({ name: "", votes: 0});
    //navigate("/");
  }
 
