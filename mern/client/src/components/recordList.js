@@ -179,36 +179,6 @@ export default function IdeaList() {
  // This following section will display the table with the records of individuals.
  return (
   <div>
-    <div>
-      <input
-        type="text"
-        value={createCode}
-        onChange={handleCreateCodeChange}
-        placeholder="Create a join code"
-      />
-      <button onClick={handleCreateRoom} className="btn btn-primary">
-        Create Room
-      </button>
-    </div>
-    <div>
-      <input
-        type="text"
-        value={joinCode}
-        onChange={handleJoinCodeChange}
-        placeholder="Enter join code to join"
-      />
-      <button onClick={handleJoinRoom} className="btn btn-primary">
-        Join Room
-      </button>
-    </div>
-    <div>
-        <input 
-          type="text" 
-          value={projectContext} 
-          onChange={(e) => setProjectContext(e.target.value)} 
-          placeholder="Enter project context"
-        />
-    </div>
     <h3>Idea List</h3>
     <table className="table table-striped" style={{ marginTop: 20 }}>
       <thead>

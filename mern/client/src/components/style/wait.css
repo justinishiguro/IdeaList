@@ -8,6 +8,17 @@
     box-sizing: border-box;
 }
 
+.idea-wrapper {
+    align-items: center;
+    background-color: #ffffff;
+    border: 5px solid #ffda2d;
+    border-radius: 82px;
+    display: flex;
+    justify-content: center;
+    padding: 10px 58px;
+    margin: 20px 0; /* Adjust as needed */
+}
+
 .content-container {
     display: flex;
     align-items: center;
