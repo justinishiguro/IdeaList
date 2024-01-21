@@ -19,7 +19,7 @@ const io = new Server(server, {
   }
 });
 
-const phaseDuration = 1 * 10 * 1000; // 2 min
+const phaseDuration = 1 * 60 * 1000; //
 //let phaseTimer;
 //let isTimerStarted = false; // Keep track of the timer state
 const teamTimers = {};

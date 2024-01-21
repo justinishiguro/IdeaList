@@ -11,43 +11,7 @@ const Idea = ({ idea, deleteIdea, projectContext }) => {
   const [loading, setLoading] = useState(false);
   const [showInsights, setShowInsights] = useState(false); // State to show/hide insights
   const [insights, setInsights] = useState(''); // State for AI insights specific to this idea
-  const [timer, setTimer] = useState(null);
-  const location = useLocation(); // To access the URL query parameters
-  const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
-  const joinCode = queryParams.get('joinCode'); // Get teamId from the URL
-  const socket = useSocket();
-  
-
-  useEffect(() => {
-    console.log('Setting up socket listeners'); // Log when setting up listeners
-    if (socket && joinCode) {
-      // Join the team when the component mounts
-      //socket.emit('joinTeam', joinCode);
-
-      socket.on('timerUpdate', (data) => {
-        console.log('Timer update received:', data); // Log timer updates
-        setTimer(data.remainingTime);
-      });
-
-      socket.on('timerState', (data) => {
-        console.log('Timer state received:', data); // Log timer state changes
-      });
-
-      socket.on('phaseEnded', () => {
-        console.log('Phase ended received'); // Log phase end event
-        navigate('/recordList'); // Navigate to the RecordList page when the phase ends
-      });
-
-      // Cleanup listeners when the component unmounts
-      return () => {
-        console.log('Cleaning up socket listeners'); // Log cleanup
-        socket.off('timerUpdate');
-        socket.off('timerState');
-        socket.off('phaseEnded');
-      };
-    }
-  }, [socket, navigate, joinCode]);
+ 
 
 
 
@@ -144,11 +108,52 @@ const Idea = ({ idea, deleteIdea, projectContext }) => {
 };
 
 export default function IdeaList() {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [ideas, setIdeas] = useState([]);
   const [createCode, setCreateCode] = useState('');
-  const [joinCode, setJoinCode] = useState('');
   const [projectContext, setProjectContext] = useState('');
+  const [timer, setTimer] = useState(null);
+  const location = useLocation(); // To access the URL query parameters
+  const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search);
+  const joinCode = queryParams.get('joinCode'); // Get teamId from the URL
+  const socket = useSocket();
+  
+
+  useEffect(() => {
+    console.log('Setting up socket listeners'); // Log when setting up listeners
+    if (socket && joinCode) {
+      // Join the team when the component mounts
+      //socket.emit('joinTeam', joinCode);
+      console.log("ENTERED HERE");
+
+      console.log(joinCode);
+      socket.emit('startTimer', joinCode);
+
+      socket.on('timerUpdate', (data) => {
+        console.log('Timer update received:', data); // Log timer updates
+        setTimer(data.remainingTime);
+      });
+
+      socket.on('timerState', (data) => {
+        console.log('Timer state received:', data); // Log timer state changes
+      });
+
+      socket.on('phaseEnded', () => {
+        console.log('Phase ended received'); // Log phase end event
+        getAverage();
+        //navigate('/recordList'); // Navigate to the RecordList page when the phase ends
+      });
+
+      // Cleanup listeners when the component unmounts
+      return () => {
+        console.log('Cleaning up socket listeners'); // Log cleanup
+        socket.off('timerUpdate');
+        socket.off('timerState');
+        socket.off('phaseEnded');
+      };
+    }
+  }, [socket, navigate, joinCode]);
   
  // This method fetches the records from the database.
  useEffect(() => {
@@ -217,30 +222,7 @@ export default function IdeaList() {
     });
   };
 
-  const handleCreateCodeChange = (e) => {
-    setCreateCode(e.target.value);
-  };
 
-  const handleJoinCodeChange = (e) => {
-    setJoinCode(e.target.value);
-  };
-
-  const handleCreateRoom = () => {
-    if (createCode.trim()) {
-      navigate(`/timertest?joinCode=${createCode}`);
-    } else {
-      alert('Please enter a code to create a room.');
-    }
-  };
-
-  const handleJoinRoom = () => {
-    if (joinCode.trim()) {
-      navigate(`/timertest?joinCode=${joinCode}`);
-    } else {
-      alert('Please enter a valid join code to join a room.');
-    }
-  };
-  
 
  // This following section will display the table with the records of individuals.
  return (

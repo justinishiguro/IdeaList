@@ -37,6 +37,7 @@ export default function Wait() {
     const handleStartTimer = () => {
       // Send the event to start the timer along with the teamId
       if (joinCode) {
+        socket.emit('startTimerForTeam', joinCode);
         navigate(`/create?joinCode=${joinCode}`)
       } else {
       }
