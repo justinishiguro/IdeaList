@@ -1,33 +1,3 @@
-// import React, { useState } from "react";
-// import { useNavigate } from "react-router";
-
-//  // This following section will display the form that takes the input from the user.
-//  return (
-  //  <div>
-  //    <h3>Generate Ideas</h3>
-  //    <form onSubmit={onSubmit}>
-  //      <div className="form-group">
-  //        <label htmlFor="name">Idea</label>
-  //        <input
-  //          type="text"
-  //          className="form-control"
-  //          id="name"
-  //          value={form.name}
-  //          onChange={(e) => updateForm({ name: e.target.value })}
-  //        />
-  //      </div>
-  //      <div className="form-group">
-  //        <input
-  //          type="submit"
-  //          value="Submit Idea"
-  //          className="btn btn-primary"
-  //        />
-  //      </div>
-  //    </form>
-  //  </div>
-//  );
-// }
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import "./style/create.css";
@@ -51,6 +21,11 @@ export default function Create() {
   // This function will handle the submission.
   async function onSubmit(e) {
     e.preventDefault();
+
+    if (!form.text.trim()) {
+      window.alert("Please enter a valid idea!");
+      return;
+    }
  
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newIdea = { ...form };
@@ -74,24 +49,15 @@ export default function Create() {
 
     return (
         <div className="idea-generation">
+        <div className="content-container">
+          <img src={handsShowImage} className="hands-show" alt="Hands show" />
+          <div className="text-form-container">
             <div className="text-wrapper">IDEA GENERATION</div>
             <p className="div">It’s time to start brainstorming!</p>
-            <img src={handsShowImage} className="hands-show" alt="Hands show" />
             <div className="frame">
-                <div className="group">
-                    <p className="TIME">
-                        <span className="span">TIME</span>
-                        <span className="text-wrapper-2">: </span>
-                        <span className="span">0:00</span>
-                    </p>
-                </div>
-                <div>
-                    {/* <p className="idea">
-                        <span className="text-wrapper-3">idea 1 </span>
-                        <span className="text-wrapper-4">... </span>
-                    </p> */}
-                    <form onSubmit={onSubmit}>
-                      <div className="idea">
+              {/* ... additional content ... */}
+              <form onSubmit={onSubmit}>
+              <div className="idea">
                         {/* <label htmlFor="text">Idea</label> */}
                         <input
                           type="text"
@@ -109,9 +75,10 @@ export default function Create() {
                           className="btn-primary"
                         />
                       </div>
-                    </form>
-                </div>
+              </form>
             </div>
+          </div>
+        </div>
         </div>
     );
 }

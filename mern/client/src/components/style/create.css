@@ -1,12 +1,19 @@
 .idea-generation {
-    background-color: #00e0ff;
-    min-height: 100vh; /* Full viewport height */
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Center the content vertically and horizontally */
-    padding: 50px; /* Add some padding around */
-    box-sizing: border-box; /* Include padding in the width and height */
+    align-items: center; /* Aligns items vertically */
+    justify-content: center; /* Center content horizontally */
+    min-height: 100vh;
+    background-color: #00e0ff;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.content-container {
+    display: flex; /* Establishes a flex container */
+    align-items: center; /* Aligns children vertically in the container */
+    justify-content: center; /* Centers children horizontally in the container */
+    width: 100%;
+    max-width: 1200px; /* You may adjust this value */
 }
 
 .text-wrapper {
@@ -26,14 +33,13 @@
 }
 
 .hands-show {
-    /* Assuming the image will be set as a background to some div */
-    background-image: src('./style/images/hands-show.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 100%; /* Responsive width */
-    max-width: 369px; /* Max width of the image */
-    height: auto; /* Maintain aspect ratio */
-    margin: 20px 0; /* Margin around the image */
+    max-width: 50%; /* Adjust to your preference */
+    height: auto; /* Keeps the aspect ratio of the image */
+}
+
+.text-form-container {
+    max-width: 50%; /* Adjust to your preference */
+    margin-left: 2rem; /* Adds space between the image and the text */
 }
 
 .frame {
@@ -91,3 +97,18 @@
     justify-content: center; /* Horizontally centers the content */
     /* Additional styles here */
   }
+
+  @media (max-width: 768px) {
+    .content-container {
+        flex-direction: column; /* Stack image and text-form-container on top of each other on small screens */
+    }
+
+    .hands-show,
+    .text-form-container {
+        max-width: 100%; /* Full width on small screens */
+    }
+
+    .text-form-container {
+        margin-left: 0; /* Remove the margin on small screens */
+    }
+}

@@ -8,6 +8,7 @@ import Navbar from "./components/navbar";
 import RecordList from "./components/recordList";
 import Edit from "./components/edit";
 import Create from "./components/create";
+import Home from "./components/home";
 
 const App = () => {
   return (
@@ -15,9 +16,10 @@ const App = () => {
       <Navbar />
       <div style={{ margin: 20 }}>
       <Routes>
-        <Route exact path="/" element={<RecordList />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/recordList" element={<RecordList />} />
       </Routes>
       </div>
     </div>

@@ -1,0 +1,64 @@
+.idea-list-container {
+    background-color: #fff275; /* The yellow background */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .idea-container {
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .idea-text {
+    color: #333;
+    margin: 5px 0;
+  }
+  
+  .heart-checkbox {
+    display: none; /* Hide the default checkbox */
+  }
+  
+  .heart-checkbox-label {
+    cursor: pointer;
+    font-size: 2rem; /* Larger hearts */
+  }
+  
+  .heart {
+    color: #ccc; /* Default heart color */
+  }
+  
+  .heart.checked {
+    color: #ff6961; /* Color for checked heart */
+  }
+  
+  .delete-button {
+    background-color: #ff6961;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .ideas-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .ideas-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
