@@ -38,4 +38,13 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.delete("/:id", async (req, res) => {
+    const query = { _id: new ObjectId(req.params.id) };
+  
+    const collection = db.collection("ideas");
+    let result = await collection.deleteOne(query);
+  
+    res.send(result).status(200);
+  });
+
 export default router; // Using ES6 default export
