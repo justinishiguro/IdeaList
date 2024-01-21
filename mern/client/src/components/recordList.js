@@ -19,6 +19,15 @@ return (
           checked={isChecked}
         />
    </td>
+   <td>
+   <button className="btn btn-link"
+       onClick={() => {
+         props.deleteRecord(props.record._id);
+       }}
+     >
+       Delete
+     </button>
+   </td>
  </tr>
 )};
 
@@ -78,6 +87,7 @@ export default function RecordList() {
          <tr>
            <th>Idea</th>
            <th>Like</th>
+           <th>Delete</th>
          </tr>
        </thead>
        <tbody>{recordList()}</tbody>
